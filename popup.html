@@ -4,30 +4,37 @@
     <title>Nodester Application Watcher</title>
     <style>
       body {
-        min-width:357px;
+        padding: 10px;
+        width:300px;
         overflow-x:hidden;
       }
     </style>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <script src="jquery-1.7.2.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
   <script src="popup.js"></script>
-  <body onload="getApps()">
-    <div>My Nodester Apps
-      <div>
-        <ul id=appsList></ul> 
+  <body onload="getApps();getServerStatus()">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#nodester-apps" data-toggle="tab">My Nodester Apps</a></li>
+      <li><a href="#configuration" data-toggle="tab">Configuration</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="nodester-apps">
+        <div class="row-fluid" id="appsList"></div>
+        <hr>
+        <div class="row-fluid" id="serverStatus"></div>
       </div>
-    </div>
-    <div> Configuration
-      <form id="configurationForm" onsubmit="saveAndUpdate()">
-        <br />
-        <label for="user">User</label>
-        <input type="text" name="user" id="user"/>
-        <br />
-        <label for="pass">Password</label>
-        <input type="password" name="pass" id="pass"/>
-        <br />
-        <input type="submit" value="Save">
-      </form>
+      <div class="tab-pane" id="configuration">
+        <form id="configurationForm" onsubmit="saveAndUpdate()">
+          <label for="user">User</label>
+          <input type="text" name="user" id="user"/>
+          <label for="pass">Password</label>
+          <input type="password" name="pass" id="pass"/>
+          <input type="submit" value="Save" class="btn btn-primary">
+        </form>
+      </div>
     </div>
   </body>
 </html>
