@@ -8,24 +8,26 @@
         overflow-x:hidden;
       }
     </style>
-
-    <!-- JavaScript and HTML must be in separate files for security. -->
+  </head>
+  <script src="jquery-1.7.2.min.js"></script>
+  <script src="popup.js"></script>
+  <body onload="getApps()">
     <div>My Nodester Apps
       <div>
         <ul id=appsList></ul> 
       </div>
     </div>
     <div> Configuration
-      <br />
-      <label for="user">User</label>
-      <input type="text" name="user" id="user" value="eocampos"/>
-      <br />
-      <label for="pass">Password</label>
-      <input type="password" name="pass" id="pass" value="malambo"/>
+      <form id="configurationForm" onsubmit="saveAndUpdate()">
+        <br />
+        <label for="user">User</label>
+        <input type="text" name="user" id="user"/>
+        <br />
+        <label for="pass">Password</label>
+        <input type="password" name="pass" id="pass"/>
+        <br />
+        <input type="submit" value="Save">
+      </form>
     </div>
-    <script src="jquery-1.7.2.min.js"></script>
-    <script src="popup.js"></script>
-  </head>
-  <body>
   </body>
 </html>
