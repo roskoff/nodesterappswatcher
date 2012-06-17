@@ -3,7 +3,7 @@
   "version": "0.1",
   "description": "This extension checks the status of your Nodester applications",
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "/img/rocket-running-true.png",
     "popup": "popup.html"
   },
   "permissions": [
