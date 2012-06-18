@@ -1,9 +1,9 @@
 {
   "name": "Nodester Application Watcher",
-  "version": "0.1",
+  "version": "0.2",
   "description": "This extension checks the status of your Nodester applications",
   "browser_action": {
-    "default_icon": "/img/rocket-running-true.png",
+    "default_icon": "/img/naw-icon.png",
     "popup": "popup.html"
   },
   "permissions": [
