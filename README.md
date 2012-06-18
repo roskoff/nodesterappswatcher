@@ -1,5 +1,6 @@
-![nodesterappswatcher icon](https://github.com/roskoff/nodesterappswatcher/raw/master/img/naw-icon.png)Nodester Apps Watcher - Google Chrome Extension
-=====================================================
+![nodesterappswatcher icon](https://github.com/roskoff/nodesterappswatcher/raw/master/img/naw-icon.png)
+Nodester Apps Watcher - Google Chrome Extension
+===============================================
 
 This simple extension enables you to watch over your apps 
 hosted on [Nodester](http://nodester.com).
