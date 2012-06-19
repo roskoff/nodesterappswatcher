@@ -6,6 +6,9 @@ function getApps() {
 	console.log('getApps');
     var user = $("#user").val();
     var pass = $("#pass").val();
+
+    showProgress();
+
 	$.ajax({
 		type: 'GET',
 		url: urlAPI + "/apps",
@@ -16,6 +19,14 @@ function getApps() {
 		success: renderList,
         error: renderError
 	});
+}
+
+function showProgress(){
+    $("#appsList").append('<div style="width: 16px; margin: 0 auto;"><img id="progress" src="img/ajax-loader.gif"> </div>');
+}
+
+function hideProgres(){
+ $("#progress").hide();
 }
 
 function getServerStatus() {
@@ -30,6 +41,9 @@ function getServerStatus() {
 }
 
 function renderList(data) {
+
+    hideProgres();
+
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
 	var list = data == null ? [] : (data instanceof Array ? data : [data]);
     console.log("List: " + list);
@@ -72,6 +86,8 @@ function renderServerError(xhr, err){
 }
 
 function renderError(xhr, err){
+    hideProgres();
+
     var appsList = $("#appsList");
     appsList.empty();
     var div = '<div class="alert alert-error"><p>Couldn\'t get any app :(</p>';
