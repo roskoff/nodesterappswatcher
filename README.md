@@ -1,4 +1,4 @@
-![nodesterappswatcher icon](https://github.com/roskoff/nodesterappswatcher/raw/master/img/naw-icon.png)
+![nodesterappswatcher icon](https://github.com/roskoff/nodesterappswatcher/raw/master/img/naw-icon128.png)
 Nodester Apps Watcher - Google Chrome Extension
 ===============================================
 
