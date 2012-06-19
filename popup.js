@@ -3,49 +3,48 @@ var urlAPI = "http://nodester.com";
 
 function getApps() {
     loadConfiguration();
-	console.log('getApps');
+    console.log('getApps');
     var user = $("#user").val();
     var pass = $("#pass").val();
 
     showProgress();
 
-	$.ajax({
-		type: 'GET',
-		url: urlAPI + "/apps",
-		dataType: "json",
+    $.ajax({
+        type: 'GET',
+        url: urlAPI + "/apps",
+        dataType: "json",
         "beforeSend": function(xhr) {
             xhr.setRequestHeader("Authorization", "Basic " + btoa(user + ":" + pass))
             },
-		success: renderList,
+        success: renderList,
         error: renderError
-	});
+    });
 }
 
 function showProgress(){
-    $("#appsList").append('<div style="width: 16px; margin: 0 auto;"><img id="progress" src="img/ajax-loader.gif"> </div>');
+    $("#appsList").append('<div class="spinner"><img id="progress" src="img/ajax-loader.gif"> </div>');
 }
 
 function hideProgres(){
- $("#progress").hide();
+    $("#progress").hide();
 }
 
 function getServerStatus() {
-	console.log('getServerStatus');
-	$.ajax({
-		type: 'GET',
-		url: urlAPI + "/status",
-		dataType: "json",
-		success: renderStatus,
+    console.log('getServerStatus');
+    $.ajax({
+        type: 'GET',
+        url: urlAPI + "/status",
+        dataType: "json",
+        success: renderStatus,
         error: renderServerError
-	});
+    });
 }
 
 function renderList(data) {
-
     hideProgres();
 
-	// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
-	var list = data == null ? [] : (data instanceof Array ? data : [data]);
+    // JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
+    var list = data == null ? [] : (data instanceof Array ? data : [data]);
     console.log("List: " + list);
     var appsList = $("#appsList");
     appsList.empty();
@@ -56,7 +55,7 @@ function renderList(data) {
                 '<div class="span6"><h4>Status</h4></div>' +
             '</div>' +
         '</div>');
-	$.each(list, function(index, app) {
+    $.each(list, function(index, app) {
         appsList.append(
             '<div class="span12">' +
                 '<div class="row-fluid">' +
@@ -65,7 +64,7 @@ function renderList(data) {
                 '</div>' +
             '</div>');
         var status = app.running === 'true' ? "running! \\m/" : "down :(";
-        $("#img_"+app.name).tooltip({"title":"App is " + status, "placement":"right"});//, "content":"this is the content"});
+        $("#img_"+app.name).tooltip({"title":"App is " + status, "placement":"right"});
         console.log(app.name+' - '+app.running);
 	});
 }
@@ -104,13 +103,13 @@ function renderError(xhr, err){
 }
 
 function saveConfiguration() {
-	console.log('saveConfiguration');
+    console.log('saveConfiguration');
     localStorage.user = $("#user").val();
     localStorage.pass = $("#pass").val();
 }
 
 function loadConfiguration() {
-	console.log('loadConfiguration');
+    console.log('loadConfiguration');
     $("#user").val(localStorage.user); 
     $("#pass").val(localStorage.pass); 
 }
