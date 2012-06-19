@@ -14,10 +14,14 @@ your apps hosted and its respective status.
 Also, at the bottom you will see the overall server status with some stats of
 the hosted apps.
 
+Collaborators
+=============
+- [jaydeepw](https://github.com/jaydeepw) ([@Jaydeep_W](https://twitter.com/#!/Jaydeep_W))
+
 License
 =======
 
-Copyright (C) NAW Eliseo Ocampos <roskoff@gmail.com>
+Copyright (C) NAW Eliseo Ocampos <roskoff@gmail.com> et al.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
