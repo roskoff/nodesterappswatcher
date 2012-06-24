@@ -55,21 +55,40 @@ function renderList(data) {
                 '<div class="span6"><h4>Status</h4></div>' +
             '</div>' +
         '</div>');
+    var appRunning;
     $.each(list, function(index, app) {
-        appsList.append(
-            '<div class="span12">' +
-                '<div class="row-fluid">' +
-                    '<div class="span6"><a href="http://'+app.name+'.nodester.com" target="_blank">'+app.name+'</a></div>' +
-                    '<div class="span6"><img id="img_'+app.name+'" width="24" src="/img/rocket-running-'+app.running+'.png"></div>' +
-                '</div>' +
-            '</div>');
-        var status = app.running === 'true' ? "running! \\m/" : "down :(";
-        $("#img_"+app.name).tooltip({"title":"App is " + status, "placement":"right"});
-        console.log(app.name+' - '+app.running);
-	});
+        // Double check if app is running, sometimes Nodester API reports the 
+        // process is still running, but actually the service is unavailable.
+        // See jaydeepw reported issue: https://github.com/roskoff/nodesterappswatcher/issues/2
+        $.ajax({
+            type: 'GET',
+            url: 'http://'+app.name+'.nodester.com/',
+            success: function(data, status, xhr){
+                var appRunning = app.running === "true" && xhr.status !== "503";
+                appRow(appsList, app.name, appRunning);
+            },
+            error: function(xhr, err){
+                appRow(appsList, app.name, 'false');
+            }
+        });
+    })
+}
+
+function appRow(list, name, status){
+    list.append(
+        '<div class="span12">' +
+            '<div class="row-fluid">' +
+                '<div class="span6"><a href="http://'+name+'.nodester.com" target="_blank">'+name+'</a></div>' +
+                '<div class="span6"><img id="img_'+name+'" width="24" src="/img/rocket-running-'+status+'.png"></div>' +
+            '</div>' +
+        '</div>');
+    var s = status === 'true' ? "running! \\m/" : "down :(";
+    $("#img_"+name).tooltip({"title":"App is " + s, "placement":"right"});
+    console.log(name+' - '+status);
 }
 
 function renderStatus(data) {
+    console.log('renderStatus');
     var serverStatus = $("#serverStatus");
     var statusLabel = data.status === "up" ? "success" : "important";
     serverStatus.empty();

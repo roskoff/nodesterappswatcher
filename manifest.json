@@ -12,6 +12,6 @@
     "16": "/img/naw-icon16.png"
   },
   "permissions": [
-    "http://nodester.com/"
+    "http://*.nodester.com/"
   ]
 }
