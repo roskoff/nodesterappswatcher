@@ -68,7 +68,7 @@ function renderList(data) {
                 appRow(appsList, app.name, appRunning);
             },
             error: function(xhr, err){
-                appRow(appsList, app.name, 'false');
+                appRow(appsList, app.name, false);
             }
         });
     })
@@ -82,7 +82,7 @@ function appRow(list, name, status){
                 '<div class="span6"><img id="img_'+name+'" width="24" src="/img/rocket-running-'+status+'.png"></div>' +
             '</div>' +
         '</div>');
-    var s = status === 'true' ? "running! \\m/" : "down :(";
+    var s = status === true ? "running! \\m/" : "down :(";
     $("#img_"+name).tooltip({"title":"App is " + s, "placement":"right"});
     console.log(name+' - '+status);
 }
