@@ -16,7 +16,9 @@ function getApps() {
         "beforeSend": function(xhr) {
             xhr.setRequestHeader("Authorization", "Basic " + btoa(user + ":" + pass))
             },
-        success: renderList,
+        success: function(data, status, xhr){
+                renderList(data, status, xhr);
+            },
         error: renderError
     });
 }
@@ -40,13 +42,48 @@ function getServerStatus() {
     });
 }
 
-function renderList(data) {
+function renderList(data, status, xhr) {
+    var list;
+    var appsList = $("#appsList");
+
     hideProgres();
 
+    //uncomment the line below to simulate the error condition.
+    //status = "error";
+    if(status == "error"){
+        appsList.append(
+        '<div class="alert alert-error">' +
+            '<em>Something seems to have gone wrong with Nodester, please try again later.</em>' +
+        '</div>');
+        return;
+    }
+
+    //uncomment the line below to simulate the Unauthorized condition.
+    //xhr.status = 401;
+    if(xhr.status === 401){
+        appsList.append(
+        '<div class="alert alert-error">' +
+            '<em>Unable to Authorize. Please re-enter username and password using configuration tab.</em>' +
+        '</div>');
+        return;
+    }
+
+    //uncomment the line below to simulate the Server error condition.
+    //xhr.status = 500;
+    if(xhr.status === 500){
+        appsList.append(
+        '<div class="alert alert-error">' +
+            '<em>Something seems to have gone wrong with Nodester, please try again later.</em>' +
+        '</div>');
+        return;
+    }
+    // The above part can be combined with status='error' condition, 
+    //user messages for both of them are same.
+
+
     // JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
-    var list = data == null ? [] : (data instanceof Array ? data : [data]);
-    console.log("List: " + list);
-    var appsList = $("#appsList");
+    list = data == null ? [] : (data instanceof Array ? data : [data]);
+    //console.log("List: " + list);
     appsList.empty();
     appsList.append(
         '<div class="span12">' +
