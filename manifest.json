@@ -1,4 +1,5 @@
 {
+  "manifest_version": 2,
   "name": "Nodester Application Watcher",
   "version": "0.5",
   "description": "This extension checks the status of your Nodester applications",
